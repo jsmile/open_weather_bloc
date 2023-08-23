@@ -4,10 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
-import 'cubits/temp_settings/temp_settings_cubit.dart';
-import 'cubits/weather/weather_cubit.dart';
-
-import 'cubits/theme/theme_cubit.dart';
+import 'blocs/blocs.dart';
 import 'pages/home_page.dart';
 import 'repositories/weather_repository.dart';
 import 'services/weather_api_service.dart';
@@ -33,32 +30,32 @@ class MyApp extends StatelessWidget {
       ),
       child: MultiBlocProvider(
         providers: [
-          BlocProvider<WeatherCubit>(
-            create: (context) => WeatherCubit(
+          BlocProvider<WeatherBloc>(
+            create: (context) => WeatherBloc(
               weatherRepository: context.read<WeatherRepository>(),
             ),
           ),
-          BlocProvider<TempSettingsCubit>(
-            create: (context) => TempSettingsCubit(),
+          BlocProvider<TempSettingsBloc>(
+            create: (context) => TempSettingsBloc(),
           ),
-          BlocProvider<ThemeCubit>(
-            create: (context) => ThemeCubit(
-              weatherCubit: context.read<WeatherCubit>(),
+          BlocProvider<ThemeBloc>(
+            create: (context) => ThemeBloc(
+              weatherBloc: context.read<WeatherBloc>(),
             ),
           )
         ],
         // context 적용 시
-        // Error: Could not find the correct Provider<ThemeCubit> 문제 해결을 위해
+        // Error: Could not find the correct Provider<ThemeBloc> 문제 해결을 위해
         // 올바른 context 의 지정이 필요하므로 builder 를 사용해야 하고
         // 이를 위해 BlocBuilder<xxxBloc, xxxState>( builder: (context, state) { ... } ) 적용.
-        child: BlocBuilder<ThemeCubit, ThemeState>(
+        child: BlocBuilder<ThemeBloc, ThemeState>(
           builder: (context, state) {
             return MaterialApp(
-              title: 'Flutter BLoC - OpenWeather Cubit',
+              title: 'Flutter BLoC - OpenWeather Bloc',
               debugShowCheckedModeBanner: false,
               theme:
                   // BlocBuilder<>() 가 context.watch<> 역할을 하므로 삭제
-                  // context.watch<ThemeCubit>().state.appTheme == AppTheme.light
+                  // context.watch<ThemeBloc>().state.appTheme == AppTheme.light
                   state.appTheme == AppTheme.light
                       ? ThemeData.light()
                       : ThemeData.dark(),

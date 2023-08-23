@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '/cubits/temp_settings/temp_settings_cubit.dart';
-import '/cubits/weather/weather_cubit.dart';
+import '/blocs/blocs.dart';
 import '/pages/search_page.dart';
 import 'package:recase/recase.dart';
 
@@ -47,7 +46,9 @@ class _HomePageState extends State<HomePage> {
 
               // 검색 결과가 있으면 날씨 정보를 가져옴.
               if (city != null) {
-                context.read<WeatherCubit>().fetchWeather(city!);
+                // Cubit 함수 호출은 .add( Event() ) 로 변경.
+                // context.read<WeatherBloc>().fetchWeather(city!);
+                context.read<WeatherBloc>().add(FetchWeatherEvent(city: city!));
               }
             },
           ),
@@ -71,7 +72,7 @@ class _HomePageState extends State<HomePage> {
   // 조회결과가 정상이면 날씨 정보를 보여주고,
   // Error 이면 Error Dialog 를 보여줌.
   Widget _showWeather() {
-    return BlocConsumer<WeatherCubit, WeatherState>(
+    return BlocConsumer<WeatherBloc, WeatherState>(
       // listener : error 발생여부 관찰
       // builder : 조회결과에 따른 화면 표시
       listener: (context, state) {
@@ -184,7 +185,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   String showTemperature(double temperature) {
-    final tempUnit = context.watch<TempSettingsCubit>().state.tempUnit;
+    final tempUnit = context.watch<TempSettingsBloc>().state.tempUnit;
 
     if (tempUnit == TempUnit.fahrenheit) {
       return '${(temperature * 9 / 5 + 32).toStringAsFixed(2)} ℉';
