@@ -15,7 +15,6 @@ import 'services/weather_api_service.dart';
 void main() async {
   ansiColorDisabled = false;
   // 환경변수 읽기
-  // await dotenv.load(fileName: '.env', isOptional: true);
   await dotenv.load(fileName: '.env');
   runApp(const MyApp());
 }
@@ -25,6 +24,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // MultiBlocProvider 에서 사용할 수 있도록 RepositoryProvider() 를 상위에 정의.
     return RepositoryProvider(
       create: (context) => WeatherRepository(
         weatherApiService: WeatherApiService(

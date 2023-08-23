@@ -11,6 +11,7 @@ import '/models/weather.dart';
 import '../utils/ansi_color.dart';
 import 'http_error_handler.dart';
 
+/// 직접적으로 외부 API 와 통신( async 작업 )하는 class
 class WeatherApiService {
   final http.Client httpClient;
 

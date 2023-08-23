@@ -1,8 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '/repositories/weather_repository.dart';
 
+import '/repositories/weather_repository.dart';
 import '/models/custom_error.dart';
 import '/models/weather.dart';
 import '/utils/ansi_color.dart';
@@ -10,7 +10,7 @@ import '/utils/ansi_color.dart';
 part 'weather_state.dart';
 
 class WeatherCubit extends Cubit<WeatherState> {
-  // 날씨 정보가 필요하므로
+  // 원격 날씨 정보가 필요하므로
   final WeatherRepository weatherRepository;
 
   WeatherCubit({required this.weatherRepository})

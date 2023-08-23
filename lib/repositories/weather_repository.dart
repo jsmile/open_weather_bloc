@@ -8,6 +8,9 @@ import '/services/weather_api_service.dart';
 import '/models/direct_geocoding.dart';
 import '/utils/ansi_color.dart';
 
+/// Repository 는 async 작업인 원격 Data 인 API 호출이나 원격 DB 사용 시 사용함.
+/// 특히 복수개의 API 를 복합하여 사용하는 경우에 좋음( API Service 추상화 ).
+/// UI 에서는 RepositoryProvider() 를 사용하여 호출함.
 class WeatherRepository {
   final WeatherApiService weatherApiService;
 
