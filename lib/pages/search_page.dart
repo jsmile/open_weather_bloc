@@ -81,7 +81,9 @@ class _SearchPageState extends State<SearchPage> {
         final form = _formKey.currentState;
         if (form != null && form.validate()) {
           form.save();
-          // form.validate() 를 통과했으면 _city 는 null 이 아님므로 ! 를 붙여줌.
+          // 이전 page 로 돌아가기 위해 pop() 호출
+          // 반환값으로 _city를 보냄
+          // ( form.validate() 를 통과했으면 null 이 아님므로 !붙임 ).
           Navigator.pop(context, _city!.trim());
         }
       },

@@ -1,6 +1,4 @@
-import 'dart:async';
-
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 
 part 'temp_settings_event.dart';
@@ -19,6 +17,7 @@ class TempSettingsBloc extends Bloc<TempSettingsEvent, TempSettingsState> {
     Emitter<TempSettingsState> emit,
   ) {
     // 현재 settrings 상태에 따라 반대로 변경
+    // EventHandler 안이므로 emit( State ) 형식으로 직접 반영
     emit(
       state.copyWith(
         tempUnit: state.tempUnit == TempUnit.celcius
