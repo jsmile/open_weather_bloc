@@ -10,7 +10,7 @@ part 'theme_event.dart';
 part 'theme_state.dart';
 
 class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
-  // 온도 정보를 받아서 그에 따라 Theme 를 변경해야 하므로
+  // 다른 State 인 온도 정보를 받아서 그에 따라 Theme 를 변경해야 하므로
   // 참조할 Bloc 와 StreamSubscription 선언
   final WeatherBloc weatherBloc;
   // 생성자 함수의 body 에서 초기화할 것이므로 late 선언

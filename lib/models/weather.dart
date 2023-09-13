@@ -59,7 +59,7 @@ class Weather extends Equatable {
     };
   }
 
-  factory Weather.fromMap(Map<String, dynamic> map) {
+  factory Weather.fromJsonMap(Map<String, dynamic> map) {
     final weather = map['weather'][0];
     final main = map['main'];
 
@@ -94,7 +94,7 @@ class Weather extends Equatable {
   String toJson() => json.encode(toMap());
 
   factory Weather.fromJson(String source) =>
-      Weather.fromMap(json.decode(source));
+      Weather.fromJsonMap(json.decode(source));
 
   Weather copyWith({
     String? discription,

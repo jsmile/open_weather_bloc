@@ -80,7 +80,7 @@ class WeatherApiService {
       // 외부 API 에서 받은 json 을 dart 의 map 으로 변환
       final responseBody = json.decode(response.body);
       // map 을 Weather model 로 변환
-      final Weather weather = Weather.fromMap(responseBody);
+      final Weather weather = Weather.fromJsonMap(responseBody);
 
       return weather;
     } catch (e) {
