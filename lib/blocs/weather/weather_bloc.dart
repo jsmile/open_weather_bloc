@@ -29,9 +29,9 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
     try {
       // API 의 호출 시작을 알림.
       emit(state.copyWith(status: WeatherStatus.loading));
-      // event 를 통해 Repository 실행 --> API 의 호출
+      // event 에서 전달받은 data 로 API 조회( Data Fetch )
       final Weather weather = await weatherRepository.fetchWeather(event.city);
-      // API 의 작업 완료를 알림
+      // 조회된 Data 로 State Stream 활성화( API 의 작업 완료를 알림 )
       emit(
         state.copyWith(
           weather: weather,
