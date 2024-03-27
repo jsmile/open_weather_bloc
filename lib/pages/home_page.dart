@@ -46,6 +46,8 @@ class _HomePageState extends State<HomePage> {
 
               // 검색 결과가 있으면 날씨 정보를 가져옴.
               if (city != null) {
+                // 화면이 dispose 되었을 경우에는 에러가 발생하므로 mounted 로 체크.( use_build_context_synchronously )
+                if (!context.mounted) return;
                 // Cubit 함수 호출은 .add( Event() ) 로 변경.
                 // context.read<WeatherBloc>().fetchWeather(city!);
                 context.read<WeatherBloc>().add(FetchWeatherEvent(city: city!));

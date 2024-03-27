@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
+
 import '/constants/constants.dart';
 import '/exceptions/weather_exception.dart';
 import '/models/direct_geocoding.dart';
@@ -80,7 +81,7 @@ class WeatherApiService {
       // 외부 API 에서 받은 json 을 dart 의 map 으로 변환
       final responseBody = json.decode(response.body);
       // map 을 Weather model 로 변환
-      final Weather weather = Weather.fromJsonMap(responseBody);
+      final Weather weather = Weather.fromMap(responseBody);
 
       return weather;
     } catch (e) {
